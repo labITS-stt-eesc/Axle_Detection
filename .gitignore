@@ -137,4 +137,9 @@ dmypy.json
 /FRCNN/Test_Images/*.*
 /FRCNN/train_images/*.*
 
-
+# SSD
+/FRCNN/*.h5
+/FRCNN/Data/Result_Images/*.*
+/FRCNN/Test_Images/*.*
+/FRCNN/Test_Images1/*.*
+/FRCNN/JPEGImages/*.*
