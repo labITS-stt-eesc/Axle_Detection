@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# YOLO Network Weights
+/YOLOV3/utils/yolo.h5
