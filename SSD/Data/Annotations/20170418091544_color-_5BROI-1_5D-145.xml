@@ -1,0 +1,70 @@
+<annotation verified="yes">
+    <folder>Annotation</folder>
+    <filename>20170418091544_color-%5BROI-1%5D-145.jpg</filename>
+    <path>TCC-PascalVOC-export/Annotations/20170418091544_color-%5BROI-1%5D-145.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>1920</width>
+        <height>834</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1729.465648854962</xmin>
+        <ymin>659.4312100638978</ymin>
+        <xmax>1865.3712699514228</xmax>
+        <ymax>799.3193889776358</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1229.8126301179736</xmin>
+        <ymin>667.42482028754</ymin>
+        <xmax>1367.0506592643997</xmax>
+        <ymax>801.98392571885</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>540.9576682859126</xmin>
+        <ymin>672.753893769968</ymin>
+        <xmax>662.2068008327551</xmax>
+        <ymax>796.6548522364217</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>395.7251908396947</xmin>
+        <ymin>668.757088658147</ymin>
+        <xmax>516.9743233865372</xmax>
+        <ymax>793.9903154952077</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>251.82512144344207</xmin>
+        <ymin>668.757088658147</ymin>
+        <xmax>369.07702984038866</xmax>
+        <ymax>792.6580471246007</ymax>
+    </bndbox>
+</object>
+</annotation>

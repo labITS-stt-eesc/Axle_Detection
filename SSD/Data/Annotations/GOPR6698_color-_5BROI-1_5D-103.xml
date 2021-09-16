@@ -1,0 +1,81 @@
+<annotation verified="yes">
+    <folder>Annotation</folder>
+    <filename>GOPR6698_color-%5BROI-1%5D-103.jpg</filename>
+    <path>TCC-PascalVOC-export/Annotations/GOPR6698_color-%5BROI-1%5D-103.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>1920</width>
+        <height>390</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1616.2109646079111</xmin>
+        <ymin>278.6694752559727</ymin>
+        <xmax>1673.5045107564192</xmax>
+        <ymax>337.2360281569966</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1429.673837612769</xmin>
+        <ymin>277.3384172354949</ymin>
+        <xmax>1486.967383761277</xmax>
+        <ymax>334.57391211604096</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1360.3886190145734</xmin>
+        <ymin>274.67630119453923</ymin>
+        <xmax>1419.0145732130466</xmax>
+        <ymax>333.24285409556313</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1047.2727272727273</xmin>
+        <ymin>268.02101109215016</ymin>
+        <xmax>1108.5634975711312</xmax>
+        <ymax>326.58756399317406</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>976.6551006245663</xmin>
+        <ymin>265.35889505119457</ymin>
+        <xmax>1037.9458709229702</xmax>
+        <ymax>326.58756399317406</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>903.3726578764747</xmin>
+        <ymin>265.35889505119457</ymin>
+        <xmax>965.9958362248439</xmax>
+        <ymax>325.2565059726963</ymax>
+    </bndbox>
+</object>
+</annotation>

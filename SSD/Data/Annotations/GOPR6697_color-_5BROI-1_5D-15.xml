@@ -1,0 +1,70 @@
+<annotation verified="yes">
+    <folder>Annotation</folder>
+    <filename>GOPR6697_color-%5BROI-1%5D-15.jpg</filename>
+    <path>TCC-PascalVOC-export/Annotations/GOPR6697_color-%5BROI-1%5D-15.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>1920</width>
+        <height>386</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1332.4080499653019</xmin>
+        <ymin>283.32316810344827</ymin>
+        <xmax>1388.3691880638446</xmax>
+        <ymax>336.5645474137931</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1143.206106870229</xmin>
+        <ymin>279.3300646551724</ymin>
+        <xmax>1201.8320610687022</xmax>
+        <ymax>335.23351293103445</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>818.0985426786954</xmin>
+        <ymin>272.6748922413793</ymin>
+        <xmax>882.0541290770299</xmax>
+        <ymax>332.57144396551723</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>740.8188757807079</xmin>
+        <ymin>272.6748922413793</ymin>
+        <xmax>803.4420541290771</xmax>
+        <ymax>331.24040948275865</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>666.2040249826509</xmin>
+        <ymin>271.3438577586207</ymin>
+        <xmax>726.1623872310895</xmax>
+        <ymax>331.2404094827586</ymax>
+    </bndbox>
+</object>
+</annotation>

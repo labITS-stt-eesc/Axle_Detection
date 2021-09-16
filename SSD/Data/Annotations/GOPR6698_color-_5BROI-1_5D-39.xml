@@ -1,0 +1,70 @@
+<annotation verified="yes">
+    <folder>Annotation</folder>
+    <filename>GOPR6698_color-%5BROI-1%5D-39.jpg</filename>
+    <path>TCC-PascalVOC-export/Annotations/GOPR6698_color-%5BROI-1%5D-39.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>1920</width>
+        <height>390</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1789.4240111034005</xmin>
+        <ymin>289.3179394197952</ymin>
+        <xmax>1846.7175572519086</xmax>
+        <ymax>345.22237627986345</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1553.587786259542</xmin>
+        <ymin>283.99370733788396</ymin>
+        <xmax>1612.2137404580153</xmax>
+        <ymax>337.2360281569966</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>386.39833448993755</xmin>
+        <ymin>257.37254692832767</ymin>
+        <xmax>450.35392088827206</xmax>
+        <ymax>313.2769837883959</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>57.293546148507986</xmin>
+        <ymin>252.0483148464164</ymin>
+        <xmax>125.24635669673839</xmax>
+        <ymax>311.9459257679181</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>0</xmin>
+        <ymin>252.0483148464164</ymin>
+        <xmax>43.969465648854964</xmax>
+        <ymax>305.290635665529</ymax>
+    </bndbox>
+</object>
+</annotation>

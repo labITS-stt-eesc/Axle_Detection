@@ -1,0 +1,70 @@
+<annotation verified="yes">
+    <folder>Annotation</folder>
+    <filename>20160927110318-550_color-%5BROI-1%5D-4.jpg</filename>
+    <path>TCC-PascalVOC-export/Annotations/20160927110318-550_color-%5BROI-1%5D-4.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>1920</width>
+        <height>772</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>164.68619246861925</xmin>
+        <ymin>601.1389731369151</ymin>
+        <xmax>321.3389121338912</xmax>
+        <ymax>755.0037911611785</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>344.1004184100418</xmin>
+        <ymin>601.1389731369151</ymin>
+        <xmax>499.41422594142256</xmax>
+        <ymax>752.3278812824957</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>527.531380753138</xmin>
+        <ymin>603.814883015598</ymin>
+        <xmax>688.2008368200836</xmax>
+        <ymax>752.3278812824957</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1018.9121338912133</xmin>
+        <ymin>598.4630632582323</ymin>
+        <xmax>1183.5983263598325</xmax>
+        <ymax>752.3278812824957</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1534.3933054393306</xmin>
+        <ymin>591.7732885615252</ymin>
+        <xmax>1696.4016736401672</xmax>
+        <ymax>750.9899263431544</ymax>
+    </bndbox>
+</object>
+</annotation>

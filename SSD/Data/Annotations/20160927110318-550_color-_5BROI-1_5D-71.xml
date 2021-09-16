@@ -1,0 +1,48 @@
+<annotation verified="yes">
+    <folder>Annotation</folder>
+    <filename>20160927110318-550_color-%5BROI-1%5D-71.jpg</filename>
+    <path>TCC-PascalVOC-export/Annotations/20160927110318-550_color-%5BROI-1%5D-71.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>1920</width>
+        <height>772</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>617.2384937238494</xmin>
+        <ymin>598.4630632582323</ymin>
+        <xmax>771.2133891213389</xmax>
+        <ymax>748.3140164644715</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>795.3138075313807</xmin>
+        <ymin>597.1251083188909</ymin>
+        <xmax>946.6108786610878</xmax>
+        <ymax>749.6519714038129</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1558.4937238493724</xmin>
+        <ymin>598.4630632582323</ymin>
+        <xmax>1709.7907949790795</xmax>
+        <ymax>749.6519714038129</ymax>
+    </bndbox>
+</object>
+</annotation>

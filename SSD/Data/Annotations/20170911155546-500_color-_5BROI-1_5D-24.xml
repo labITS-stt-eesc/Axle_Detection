@@ -1,0 +1,70 @@
+<annotation verified="yes">
+    <folder>Annotation</folder>
+    <filename>20170911155546-500_color-%5BROI-1%5D-24.jpg</filename>
+    <path>TCC-PascalVOC-export/Annotations/20170911155546-500_color-%5BROI-1%5D-24.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>1920</width>
+        <height>594</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1433.671061762665</xmin>
+        <ymin>446.0410594170404</ymin>
+        <xmax>1525.6072172102708</xmax>
+        <ymax>543.2652746636771</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>1096.5718251214435</xmin>
+        <ymin>448.70473654708525</ymin>
+        <xmax>1192.5052047189452</xmax>
+        <ymax>548.5926289237668</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>602.2484385843164</xmin>
+        <ymin>446.0410594170404</ymin>
+        <xmax>710.1734906315058</xmax>
+        <ymax>545.928951793722</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>375.73907009021514</xmin>
+        <ymin>447.3728979820628</ymin>
+        <xmax>480.99930603747396</xmax>
+        <ymax>547.2607903587444</ymax>
+    </bndbox>
+</object><object>
+    <name>Eixo</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>154.55933379597502</xmin>
+        <ymin>450.03657511210764</ymin>
+        <xmax>250.49271339347678</xmax>
+        <ymax>545.928951793722</ymax>
+    </bndbox>
+</object>
+</annotation>
