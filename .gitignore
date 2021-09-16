@@ -128,5 +128,13 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# YOLO Network Weights
+# YOLO
 /YOLOV3/utils/yolo.h5
+
+# FRCNN
+/FRCNN/model_frcnn.hdf5
+/FRCNN/Result_Images/*.*
+/FRCNN/Test_Images/*.*
+/FRCNN/train_images/*.*
+
+
