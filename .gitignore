@@ -130,7 +130,7 @@ dmypy.json
 
 # YOLO
 /YOLOV3/utils/yolo.h5
-/YOLOV3/Data/Source_Images/Test_Images_Detection_Results/*.*
+/YOLOV3/Data/Source_Images/Test_Image_Detection_Results/*.*
 /YOLOV3/Data/Source_Images/Test_Images/*.*
 /YOLOV3/Data/Source_Images/Training_Images/*.*
 
