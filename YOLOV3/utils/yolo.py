@@ -8,18 +8,24 @@ import os
 from timeit import default_timer as timer
 
 import numpy as np
-from keras import backend as K
+
+import tensorflow.python.keras.backend as K
+import tensorflow as tf
+tf.compat.v1.disable_eager_execution()
+
 from keras.models import load_model
 from keras.layers import Input
 from PIL import Image, ImageFont, ImageDraw
 
 from yolo3.model import yolo_eval, yolo_body, tiny_yolo_body
 from yolo3.utils import letterbox_image
-import os
 from keras.utils import multi_gpu_model
 
 
 class YOLO(object):
+
+    current_dir = os.path.abspath(os.getcwd())
+
     _defaults = {
         "model_path": "model_data/yolo.h5",
         "anchors_path": "model_data/yolo_anchors.txt",
@@ -54,6 +60,7 @@ class YOLO(object):
 
     def _get_anchors(self):
         anchors_path = os.path.expanduser(self.anchors_path)
+        print(anchors_path)
         with open(anchors_path) as f:
             anchors = f.readline()
         anchors = [float(x) for x in anchors.split(",")]

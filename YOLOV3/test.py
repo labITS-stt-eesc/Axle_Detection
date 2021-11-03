@@ -1,5 +1,10 @@
 import os
+from utils.yolo import YOLO, detect_video
+from PIL import Image
+from timeit import default_timer as timer
 
+import pandas as pd
+import numpy as np
 
 
 def detect_object(yolo, img, save_img=True, save_img_path="output"):
@@ -19,7 +24,7 @@ def detect_object(yolo, img, save_img=True, save_img_path="output"):
 
     return prediction, image_array
 
-def get_parent_dir(n=1):
+def get_working_dir(n=1):
     #retorna o caminho para o diretório de trabalho
     current_path = os.path.dirname(os.path.abspath(__file__))
     for k in range(n):
@@ -52,18 +57,13 @@ def GetFileList(dirName, endings=[".jpg", ".jpeg", ".png", ".mp4"]):
                     allFiles.append(fullPath)
     return allFiles
 
-from utils.yolo import YOLO, detect_video
-from PIL import Image
-from timeit import default_timer as timer
 
-import pandas as pd
-import numpy as np
 
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
 # Diretórios de trabalho
-data_folder = os.path.join(get_parent_dir(0), "Data")
+data_folder = os.path.join(get_working_dir(0), "Data")
 
 image_folder = os.path.join(data_folder, "Source_Images")
 
@@ -74,10 +74,11 @@ detection_results_file = os.path.join(output_path, "Detection_Results.csv")
 
 model_folder = os.path.join(data_folder, "Model_Weights")
 
-model_weights = os.path.join(model_folder, "trained_weights_final.h5")
+#model_weights = os.path.join(model_folder, "trained_weights_final.h5")
+model_weights = os.path.join(model_folder, "yolo.h5")
 model_classes = os.path.join(model_folder, "data_classes.txt")
 
-anchors_path = os.path.join( "utils", "model_data", "yolo_anchors.txt")
+anchors_path = os.path.join(get_working_dir(0), "utils", "model_data", "yolo_anchors.txt")
 
 
 
