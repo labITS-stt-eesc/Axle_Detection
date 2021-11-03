@@ -13,9 +13,17 @@ from keras.callbacks import TensorBoard, ModelCheckpoint, ReduceLROnPlateau, Ear
 from yolo3.model import preprocess_true_boxes, yolo_body, tiny_yolo_body, yolo_loss
 from yolo3.utils import get_random_data
 
-
 from time import time
 
+import tensorflow as tf
+
+def fix_gpu():
+    config = tf.compat.v1.ConfigProto()
+    config.gpu_options.allow_growth = True
+    session = tf.compat.v1.InteractiveSession(config=config)
+
+
+fix_gpu()
 
 def get_parent_dir(n=1):
     """ returns the n-th parent dicrectory of the current
@@ -31,6 +39,8 @@ def _main():
 #Caminhos para os arquivos
 
     Data_Path = os.path.join(get_parent_dir(0), "Data")
+    Utils_Path = os.path.join(get_parent_dir(0), "utils")
+
     Image_Folder = os.path.join(Data_Path, "Source_Images", "Training_Images")
     annotation_path = os.path.join(Image_Folder, "data_train.txt")
     
@@ -38,11 +48,12 @@ def _main():
     log_dir = Model_Folder
     
     classes_path = os.path.join(Model_Folder, "data_classes.txt")
-    anchors_path = os.path.join("utils","model_data", "yolo_anchors.txt")
-    weights_path = os.path.join("utils", "yolo.h5")
+    anchors_path = os.path.join(Utils_Path,"model_data", "yolo_anchors.txt")
+    weights_path = os.path.join(Utils_Path, "yolo.h5")
     print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
     print(Image_Folder)
     print("BBBBBBBBBBBBBBBBBBBBBBBBB")
+    print(anchors_path)
     
     class_names = get_classes(classes_path)
     num_classes = len(class_names)
@@ -59,6 +70,9 @@ def _main():
 
 
     log_dir_time = os.path.join(log_dir, "{}".format(int(time())))
+    print(log_dir_time)
+    if not os.path.exists(log_dir_time):
+        os.makedirs(log_dir_time)
     logging = TensorBoard(log_dir=log_dir)
     
     
@@ -79,8 +93,6 @@ def _main():
     with open(annotation_path) as f:
         lines = f.readlines()
         
-    
-
     
 
     #separa as imagens de treino e validação
@@ -120,19 +132,19 @@ def _main():
         
         step1_train_loss = history.history["loss"]
 
-        file = open(os.path.join(log_dir_time, "step1_loss.npy"), "w")
+        #file = open(os.path.join(log_dir_time, "step1_loss.npy"), "w")
         with open(os.path.join(log_dir_time, "step1_loss.npy"), "w") as f:
             for item in step1_train_loss:
                 f.write("%s\n" % item)
-        file.close()
+        #file.close()
 
         step1_val_loss = np.array(history.history["val_loss"])
 
-        file = open(os.path.join(log_dir_time, "step1_val_loss.npy"), "w")
+        #file = open(os.path.join(log_dir_time, "step1_val_loss.npy"), "w")
         with open(os.path.join(log_dir_time, "step1_val_loss.npy"), "w") as f:
             for item in step1_val_loss:
                 f.write("%s\n" % item)
-        file.close()
+        #file.close()
 
     # Unfreeze and continue training, to fine-tune.
     # Train longer if the result is not good.
@@ -162,20 +174,20 @@ def _main():
         model.save_weights(os.path.join(log_dir, "trained_weights_final.h5"))
         step2_train_loss = history.history["loss"]
 
-        file = open(os.path.join(log_dir_time, "step2_loss.npy"), "w")
+        #file = open(os.path.join(log_dir_time, "step2_loss.npy"), "w")
         with open(os.path.join(log_dir_time, "step2_loss.npy"), "w") as f:
             for item in step2_train_loss:
                 f.write("%s\n" % item)
-        file.close()
+        #file.close()
 
         step2_val_loss = np.array(history.history["val_loss"])
 
-        file = open(os.path.join(log_dir_time, "step2_val_loss.npy"), "w")
+        #file = open(os.path.join(log_dir_time, "step2_val_loss.npy"), "w")
         with open(os.path.join(log_dir_time, "step2_val_loss.npy"), "w") as f:
             for item in step2_val_loss:
                 f.write("%s\n" % item)
-        file.close()
-
+        #file.close()
+    print("TERMINOUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
 
 
 def get_classes(classes_path):
