@@ -1,5 +1,3 @@
-
-
 import os
 from PIL import Image, ImageFont, ImageDraw
 from timeit import default_timer as timer
@@ -87,7 +85,7 @@ model = ssd_300(image_size=(img_height, img_width, 3),
                 nms_max_output_size=400)
 
 
-weights_path = 'ssd300_pascal_07+12_epoch-29_loss-1.7706_val_loss-2.0828.h5'
+weights_path = 'E:\\Projects\\Python\\Axle_Detection\\SSD\\ssd300_pascal_07+12_epoch-29_loss-1.7706_val_loss-2.0828.h5'
 
 model.load_weights(weights_path, by_name=False)
 

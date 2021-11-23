@@ -143,7 +143,7 @@ dmypy.json
 
 # SSD
 /SSD/*.h5
-/SSD/Data/Result_Images/*.*
+SSD/Data/Result_Images/*.*
 /SSD/Test_Images/*.*
 /SSD/Test_Images1/*.*
 /SSD/JPEGImages/*.*
