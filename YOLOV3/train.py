@@ -17,13 +17,10 @@ from time import time
 
 import tensorflow as tf
 
-def fix_gpu():
-    config = tf.compat.v1.ConfigProto()
-    config.gpu_options.allow_growth = True
-    session = tf.compat.v1.InteractiveSession(config=config)
-
-
-fix_gpu()
+config = tf.compat.v1.ConfigProto(gpu_options=tf.compat.v1.GPUOptions(allow_growth=True))
+sess = tf.compat.v1.Session(config=config)
+#gpus = tf.config.experimental.list_physical_devices('GPU')
+#tf.config.experimental.set_memory_growth(gpus[0], True)
 
 def get_parent_dir(n=1):
     """ returns the n-th parent dicrectory of the current
@@ -49,7 +46,7 @@ def _main():
     
     classes_path = os.path.join(Model_Folder, "data_classes.txt")
     anchors_path = os.path.join(Utils_Path,"model_data", "yolo_anchors.txt")
-    weights_path = os.path.join(Utils_Path, "yolo.h5")
+    weights_path = os.path.join(Utils_Path, "yolov3-spp.h5")
     print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
     print(Image_Folder)
     print("BBBBBBBBBBBBBBBBBBBBBBBBB")
@@ -59,10 +56,10 @@ def _main():
     num_classes = len(class_names)
     anchors = get_anchors(anchors_path)
 
-    input_shape = (416,416) # multiplo de 32, altura x largura
+    input_shape = (416,416) # multiplo de 32, altura x largura -> manter aspecto do ojeto, se possível
    
     #quantidade de epocas por periodo de treinamento
-    epoch1, epoch2 = 51, 51
+    epoch1, epoch2 = 50, 50
 
 
     model = create_model(input_shape, anchors, num_classes,
@@ -89,7 +86,8 @@ def _main():
     reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=3, verbose=1)
     early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=10, verbose=1)
 
-    val_split = 0.1
+    val_split = 0.05
+
     with open(annotation_path) as f:
         lines = f.readlines()
         
@@ -109,13 +107,13 @@ def _main():
             # use custom yolo_loss Lambda layer.
             'yolo_loss': lambda y_true, y_pred: y_pred})
 
-        batch_size = 10
+        batch_size = 16
         print('Train on {} samples, val on {} samples, with batch size {}.'.format(num_train, num_val, batch_size))
         
         
         
         
-        history = model.fit_generator(
+        history = model.fit(
             data_generator_wrapper(
                 lines[:num_train], batch_size, input_shape, anchors, num_classes
             ),
@@ -132,19 +130,19 @@ def _main():
         
         step1_train_loss = history.history["loss"]
 
-        #file = open(os.path.join(log_dir_time, "step1_loss.npy"), "w")
+        file = open(os.path.join(log_dir_time, "step1_loss.npy"), "w")
         with open(os.path.join(log_dir_time, "step1_loss.npy"), "w") as f:
             for item in step1_train_loss:
                 f.write("%s\n" % item)
-        #file.close()
+        file.close()
 
         step1_val_loss = np.array(history.history["val_loss"])
 
-        #file = open(os.path.join(log_dir_time, "step1_val_loss.npy"), "w")
+        file = open(os.path.join(log_dir_time, "step1_val_loss.npy"), "w")
         with open(os.path.join(log_dir_time, "step1_val_loss.npy"), "w") as f:
             for item in step1_val_loss:
                 f.write("%s\n" % item)
-        #file.close()
+        file.close()
 
     # Unfreeze and continue training, to fine-tune.
     # Train longer if the result is not good.
@@ -158,7 +156,7 @@ def _main():
         print('Train on {} samples, val on {} samples, with batch size {}.'.format(num_train, num_val, batch_size))
        
 
-        history = model.fit_generator(
+        history = model.fit(
             data_generator_wrapper(
                 lines[:num_train], batch_size, input_shape, anchors, num_classes
             ),
@@ -174,19 +172,19 @@ def _main():
         model.save_weights(os.path.join(log_dir, "trained_weights_final.h5"))
         step2_train_loss = history.history["loss"]
 
-        #file = open(os.path.join(log_dir_time, "step2_loss.npy"), "w")
+        file = open(os.path.join(log_dir_time, "step2_loss.npy"), "w")
         with open(os.path.join(log_dir_time, "step2_loss.npy"), "w") as f:
             for item in step2_train_loss:
                 f.write("%s\n" % item)
-        #file.close()
+        file.close()
 
         step2_val_loss = np.array(history.history["val_loss"])
 
-        #file = open(os.path.join(log_dir_time, "step2_val_loss.npy"), "w")
+        file = open(os.path.join(log_dir_time, "step2_val_loss.npy"), "w")
         with open(os.path.join(log_dir_time, "step2_val_loss.npy"), "w") as f:
             for item in step2_val_loss:
                 f.write("%s\n" % item)
-        #file.close()
+        file.close()
     print("TERMINOUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
 
 
