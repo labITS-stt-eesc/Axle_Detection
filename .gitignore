@@ -133,6 +133,7 @@ dmypy.json
 /YOLOV3/Data/Source_Images/Test_Image_Detection_Results/*.*
 /YOLOV3/Data/Source_Images/Test_Images/*.*
 /YOLOV3/Data/Source_Images/Training_Images/*.*
+/YOLOV3/Data/Model_Weights/*.*
 
 # FRCNN
 /FRCNN/model_frcnn.hdf5
