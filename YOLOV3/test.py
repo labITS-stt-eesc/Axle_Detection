@@ -74,8 +74,8 @@ detection_results_file = os.path.join(output_path, "Detection_Results.csv")
 
 model_folder = os.path.join(data_folder, "Model_Weights")
 
-#model_weights = os.path.join(model_folder, "trained_weights_final.h5")
-model_weights = os.path.join(model_folder, "yolo.h5")
+model_weights = os.path.join(model_folder, "trained_weights_final.h5")
+#model_weights = os.path.join(model_folder, "yolo.h5")
 model_classes = os.path.join(model_folder, "data_classes.txt")
 
 anchors_path = os.path.join(get_working_dir(0), "utils", "model_data", "yolo_anchors.txt")
@@ -85,7 +85,7 @@ anchors_path = os.path.join(get_working_dir(0), "utils", "model_data", "yolo_anc
 save_img = True
 
 #grau de confiança
-score = 0.5
+score = 0.25
 
 input_paths = GetFileList(input_path)
 
@@ -114,7 +114,7 @@ yolo = YOLO(
 		"classes_path": model_classes,
 		"score": score,
 		"gpu_num": 1,
-		"model_image_size": (416, 416),
+		"model_image_size": (1920, 736)
 	}
 )
 
