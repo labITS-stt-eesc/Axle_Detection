@@ -147,3 +147,6 @@ dmypy.json
 /SSD/Test_Images/*.*
 /SSD/Test_Images1/*.*
 /SSD/JPEGImages/*.*
+
+*.weights
+*.h5
