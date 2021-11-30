@@ -5,11 +5,9 @@ import numpy as np
 import sys
 import pickle
 from optparse import OptionParser
-import time
-from keras_frcnn import config
-from keras import backend as K
-from keras.layers import Input
-from keras.models import Model
+from tensorflow.keras import backend as K
+from tensorflow.keras.layers import Input
+from tensorflow.keras.models import Model
 from keras_frcnn import roi_helpers
 
 
@@ -22,12 +20,12 @@ sys.setrecursionlimit(40000)
 
 parser = OptionParser()
 
-parser.add_option("-p", "--path", dest="test_path", help="Path to test data.", default="Test_Images")
+parser.add_option("-p", "--path", dest="test_path", help="Path to test data.", default="E:\\Projects\\Python\\Axle_Detection\\FRCNN\\Test_Images")
 parser.add_option("-n", "--num_rois", type="int", dest="num_rois",
 				help="Number of ROIs per iteration. Higher means more memory use.", default=32)
 parser.add_option("--config_filename", dest="config_filename", help=
 				"Location to read the metadata related to the training (generated when training).",
-				default="config.pickle")
+				default="E:\\Projects\\Python\\Axle_Detection\\FRCNN\\config.pickle")
 parser.add_option("--network", dest="network", help="Base network to use. Supports vgg or resnet50.", default='resnet50')
 
 (options, args) = parser.parse_args()
@@ -112,7 +110,7 @@ if C.network == 'resnet50':
 elif C.network == 'vgg':
 	num_features = 512
 
-if K.image_dim_ordering() == 'th':
+if K.image_data_format() == 'channels_first':
 	input_shape_img = (3, None, None)
 	input_shape_features = (num_features, None, None)
 else:
