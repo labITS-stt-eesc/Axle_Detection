@@ -19,7 +19,7 @@ from data_generator.object_detection_2d_photometric_ops import ConvertTo3Channel
 from data_generator.data_augmentation_chain_original_ssd import SSDDataAugmentation
 
 
-
+path_to_files = "E:\\Projects\\Python\\Axle_Detection\\SSD\\"
 
 img_height = 300 # Height of the model input images
 img_width = 300 # Width of the model input images
@@ -65,7 +65,7 @@ model = ssd_300(image_size=(img_height, img_width, img_channels),
                 subtract_mean=mean_color,
                 swap_channels=swap_channels)
 
-weights_path = 'ssd300_pascal_07+12_epoch-16_loss-2.0669_val_loss-2.5514.h5'
+weights_path = path_to_files + 'ssd300_pascal_07+12_epoch-16_loss-2.0669_val_loss-2.5514.h5'
 
 model.load_weights(weights_path, by_name=True)
 
@@ -86,10 +86,10 @@ val_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=Non
 
 
 
-images_dir = 'Data\JPEGImages'
+images_dir = path_to_files + 'Data\JPEGImages'
 
-train_labels_filename = 'Train_csv.csv'
-val_labels_filename   = 'val_csv.csv'
+train_labels_filename = path_to_files + 'Train_csv.csv'
+val_labels_filename   = path_to_files + 'val_csv.csv'
 
 train_dataset.parse_csv(images_dir=images_dir,
                         labels_filename=train_labels_filename,
@@ -101,12 +101,12 @@ val_dataset.parse_csv(images_dir=images_dir,
                       input_format=['image_name', 'xmin', 'ymin', 'xmax', 'ymax', 'class_id'],
                       include_classes='all')
 
-train_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07+12_trainval_1.h5',
+train_dataset.create_hdf5_dataset(file_path=path_to_files+'dataset_pascal_voc_07+12_trainval_1.h5',
                                   resize=False,
                                   variable_image_size=True,
                                   verbose=True)
 
-val_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07_test_1.h5',
+val_dataset.create_hdf5_dataset(file_path=path_to_files+'dataset_pascal_voc_07_test_1.h5',
                                 resize=False,
                                 variable_image_size=True,
                                 verbose=True)
@@ -191,7 +191,7 @@ def lr_schedule(epoch):
     
     
     
-model_checkpoint = ModelCheckpoint(filepath='ssd300_pascal_07+12_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
+model_checkpoint = ModelCheckpoint(filepath=path_to_files+'ssd300_pascal_07+12_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
                                    monitor='val_loss',
                                    verbose=1,
                                    save_best_only=True,
@@ -200,7 +200,7 @@ model_checkpoint = ModelCheckpoint(filepath='ssd300_pascal_07+12_epoch-{epoch:02
                                    period=1)
 
 
-csv_logger = CSVLogger(filename='ssd300_pascal_07+12_training_log.csv',
+csv_logger = CSVLogger(filename=path_to_files+'ssd300_pascal_07+12_training_log.csv',
                        separator=',',
                        append=True)
 

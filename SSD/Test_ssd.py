@@ -97,10 +97,6 @@ ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
 
-
-
-
-
 input_images = [] 
 orig_images = []
 
@@ -214,8 +210,8 @@ print(
 			len(input_paths),
 			end_t - start_t,
 			len(input_paths) / (end_t - start_t),
-)
-)
+        )
+    )
         
         
         
