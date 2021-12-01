@@ -140,13 +140,17 @@ dmypy.json
 /FRCNN/Result_Images/*.*
 /FRCNN/Test_Images/*.*
 /FRCNN/train_images/*.*
+/FRCNN/txt/*.*
 
 # SSD
 /SSD/*.h5
 /SSD/Data/Result_Images/*.*
+/SSD/Data/JPEGImages/*.*
+/SSD/Data/TXT/*.*
 /SSD/Test_Images/*.*
 /SSD/Test_Images1/*.*
 /SSD/JPEGImages/*.*
+
 
 *.weights
 *.h5
