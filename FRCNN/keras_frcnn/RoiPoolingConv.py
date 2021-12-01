@@ -1,5 +1,5 @@
-from tensorflow.python.keras.layers import Layer
-import tensorflow.keras.backend as K
+from keras.engine.topology import Layer
+import keras.backend as K
 
 if K.backend() == 'tensorflow':
     import tensorflow as tf
@@ -15,9 +15,9 @@ class RoiPoolingConv(Layer):
     # Input shape
         list of two 4D tensors [X_img,X_roi] with shape:
         X_img:
-        `(1, channels, rows, cols)` if dim_ordering='channels_first'
+        `(1, channels, rows, cols)` if dim_ordering='th'
         or 4D tensor with shape:
-        `(1, rows, cols, channels)` if dim_ordering='channels_last'.
+        `(1, rows, cols, channels)` if dim_ordering='tf'.
         X_roi:
         `(1,num_rois,4)` list of rois, with ordering (x,y,w,h)
     # Output shape
@@ -35,13 +35,13 @@ class RoiPoolingConv(Layer):
         super(RoiPoolingConv, self).__init__(**kwargs)
 
     def build(self, input_shape):
-        if self.dim_ordering == 'th':
+        if self.dim_ordering == 'channels_first':
             self.nb_channels = input_shape[0][1]
-        elif self.dim_ordering == 'tf':
+        elif self.dim_ordering == 'channels_last':
             self.nb_channels = input_shape[0][3]
 
     def compute_output_shape(self, input_shape):
-        if self.dim_ordering == 'th':
+        if self.dim_ordering == 'channels_first':
             return None, self.num_rois, self.nb_channels, self.pool_size, self.pool_size
         else:
             return None, self.num_rois, self.pool_size, self.pool_size, self.nb_channels
@@ -72,7 +72,7 @@ class RoiPoolingConv(Layer):
             #NOTE: the RoiPooling implementation differs between theano and tensorflow due to the lack of a resize op
             # in theano. The theano implementation is much less efficient and leads to long compile times
 
-            if self.dim_ordering == 'th':
+            if self.dim_ordering == 'channels_first':
                 for jy in range(num_pool_regions):
                     for ix in range(num_pool_regions):
                         x1 = x + ix * row_length
@@ -96,13 +96,13 @@ class RoiPoolingConv(Layer):
                         pooled_val = K.max(xm, axis=(2, 3))
                         outputs.append(pooled_val)
 
-            elif self.dim_ordering == 'tf':
+            elif self.dim_ordering == 'channels_last':
                 x = K.cast(x, 'int32')
                 y = K.cast(y, 'int32')
                 w = K.cast(w, 'int32')
                 h = K.cast(h, 'int32')
 
-                rs = tf.image.resize_images(img[:, y:y+h, x:x+w, :], (self.pool_size, self.pool_size))
+                rs = tf.image.resize(img[:, y:y+h, x:x+w, :], (self.pool_size, self.pool_size))
                 outputs.append(rs)
 
         final_output = K.concatenate(outputs, axis=0)

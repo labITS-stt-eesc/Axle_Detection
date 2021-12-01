@@ -5,9 +5,9 @@ import numpy as np
 import sys
 import pickle
 from optparse import OptionParser
-from tensorflow.keras import backend as K
-from tensorflow.keras.layers import Input
-from tensorflow.keras.models import Model
+from keras import backend as K
+from keras.layers import Input
+from keras.models import Model
 from keras_frcnn import roi_helpers
 
 
@@ -136,6 +136,8 @@ model_classifier_only = Model([feature_map_input, roi_input], classifier)
 
 model_classifier = Model([feature_map_input, roi_input], classifier)
 
+C.model_path = "E:\\Projects\\Python\\Axle_Detection\\FRCNN\\model_frcnn.hdf5"
+
 print('Loading weights from {}'.format(C.model_path))
 model_rpn.load_weights(C.model_path, by_name=True)
 model_classifier.load_weights(C.model_path, by_name=True)
@@ -151,9 +153,11 @@ bbox_threshold = 0.8
 
 visualise = True
 
-save_path = "Result_Images"
+save_path = "E:\\Projects\\Python\\Axle_Detection\\FRCNN\\Result_Images"
 
 start_t = timer()
+
+print(img_path)
 
 for idx, img_name in enumerate(sorted(os.listdir(img_path))):
     start = timer()
@@ -165,14 +169,14 @@ for idx, img_name in enumerate(sorted(os.listdir(img_path))):
 
     X, ratio = format_img(img, C)
 
-    if K.image_dim_ordering() == 'tf':
+    if K.image_data_format() == 'channels_last':
         X = np.transpose(X, (0, 2, 3, 1))
 
 	# get the feature maps and output from the RPN
     [Y1, Y2, F] = model_rpn.predict(X)
 	
 
-    R = roi_helpers.rpn_to_roi(Y1, Y2, C, K.image_dim_ordering(), overlap_thresh=0.7)
+    R = roi_helpers.rpn_to_roi(Y1, Y2, C, K.image_data_format(), overlap_thresh=0.7)
 
 	# convert from (x1,y1,x2,y2) to (x,y,w,h)
     R[:, 2] -= R[:, 0]
@@ -248,7 +252,7 @@ for idx, img_name in enumerate(sorted(os.listdir(img_path))):
             
             draw = ImageDraw.Draw(img2)
             total_size = draw.textsize(total, font)
-            label = "Eixo: {:.2f}".format(new_probs[jk])
+            label = "Eixo : {:.2f}".format(new_probs[jk])
             label_size = draw.textsize(label, font)
             
             
@@ -259,11 +263,11 @@ for idx, img_name in enumerate(sorted(os.listdir(img_path))):
 
             for i in range(thickness):
                 draw.rectangle(
-                    [real_x1 + i, real_y1 + i, real_x2 - i,real_y2 - i], outline="#ff0000"
+                    [real_x1 + i, real_y1 + i, real_x2 - i,real_y2 - i], outline="#FFA500"
                 )
             draw.rectangle(
                 [tuple(text_origin), tuple(text_origin + label_size)],
-                fill="#ff0000",
+                fill="#FFA500",
             )
 
             all_dets.append((key,100*new_probs[jk]))
@@ -272,7 +276,7 @@ for idx, img_name in enumerate(sorted(os.listdir(img_path))):
             
             draw.rectangle(
                 [(0,0), tuple(total_size)],
-                fill="#ff0000",
+                fill="#FFA500",
             )
             draw.text(text_origin, label, fill=(0, 0, 0), font=font)
             draw.text((0,0), total, fill=(0, 0, 0), font=font)
@@ -280,7 +284,7 @@ for idx, img_name in enumerate(sorted(os.listdir(img_path))):
 
 
                                    
-            txt = os.path.join("txt", os.path.splitext(img_name)[0])     
+            txt = os.path.join("E:\\Projects\\Python\\Axle_Detection\\FRCNN\\txt", os.path.splitext(img_name)[0])     
             file_name = "{}.txt".format(txt)
 
             line = "Eixo " + " " + str(new_probs[jk]) + " " + str(int(round(real_x1))) + " " + str(int(round(real_y1))) + " " + str(int(round(real_x2))) + " " + str(int(round(real_y2))) + '\n'
