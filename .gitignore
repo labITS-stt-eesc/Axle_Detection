@@ -159,3 +159,7 @@ mAP/All_Ground_Truth/*.*
 mAP/All_Images/*.*
 mAP/mAP_SSD/input/
 mAP/mAP_SSD/output/
+mAP/mAP_yolo/input/
+mAP/mAP_yolo/output/
+mAP/mAP_FRCNN/input/
+mAP/mAP_FRCNN/output/
