@@ -521,7 +521,7 @@ with open(output_files_path + "/output.txt", 'w') as output_file:
             file_id = detection["file_id"]
             if show_animation:
                 # find ground truth image
-                ground_truth_img = glob.glob1(IMG_PATH, file_id + ".*")
+                ground_truth_img = glob.glob1(IMG_PATH, glob.escape(file_id) + ".*")
                 #tifCounter = len(glob.glob1(myPath,"*.tif"))
                 if len(ground_truth_img) == 0:
                     error("Error. Image not found with id: " + file_id)
