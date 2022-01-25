@@ -158,4 +158,4 @@ dmypy.json
 mAP/All_Ground_Truth/*.*
 mAP/All_Images/*.*
 mAP/mAP_SSD/input/
-mAP/mAP_SSD/output/*.*
+mAP/mAP_SSD/output/
