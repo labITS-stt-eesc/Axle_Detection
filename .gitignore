@@ -154,3 +154,5 @@ dmypy.json
 
 *.weights
 *.h5
+mAP/All_Ground_Truth/*.*
+mAP/All_Images/*.*
