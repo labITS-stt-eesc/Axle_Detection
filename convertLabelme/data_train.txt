@@ -1,0 +1,10 @@
+E:\Projects\Python\Axle_Detection\convertLabelme\Source_Images\5FD8EE.jpg 842,415,980,415,0 
+E:\Projects\Python\Axle_Detection\convertLabelme\Source_Images\5FD8EF.jpg 866,513,898,513,0 
+E:\Projects\Python\Axle_Detection\convertLabelme\Source_Images\5FD8F3.jpg 592,475,651,475,0 393,459,438,459,0 344,457,390,457,0 
+E:\Projects\Python\Axle_Detection\convertLabelme\Source_Images\5FD8F4.jpg 1558,829,1723,829,0 1243,753,1376,753,0 1121,727,1241,727,0 791,777,717,777,0 560,620,645,620,0 637,631,719,631,0 
+E:\Projects\Python\Axle_Detection\convertLabelme\Source_Images\5FD8FC.jpg 936,840,1007,840,0 1125,775,1192,775,0 
+E:\Projects\Python\Axle_Detection\convertLabelme\Source_Images\5FD8FF.jpg 816,750,932,750,0 555,703,636,703,0 
+E:\Projects\Python\Axle_Detection\convertLabelme\Source_Images\5FD9B1.jpg 1079,736,1220,736,0 846,706,943,706,0 763,686,859,686,0 
+E:\Projects\Python\Axle_Detection\convertLabelme\Source_Images\5FD9B8.jpg 597,756,787,756,0 
+E:\Projects\Python\Axle_Detection\convertLabelme\Source_Images\5FD9B9.jpg 607,773,780,773,0 
+E:\Projects\Python\Axle_Detection\convertLabelme\Source_Images\5FD9BA.jpg 913,474,1014,474,0 701,404,771,404,0 643,388,708,388,0 
