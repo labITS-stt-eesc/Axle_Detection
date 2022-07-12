@@ -13,12 +13,14 @@ Converts labelme annotations into FRCNN-ready training annotations
 ------------------(xmax,ymax)
 
 
-FRCNN Annotation Structure Training Data 
-"image1_path" "object1" "object2" "object3"
+FRCNN Annotation Structure for Training Data 
+"image1_path" "object1",class_name
+"image1_path" "object2",class_name
+"image1_path" "object3",class_name
 
-image1_path xmin1,ymin1,xmax1,ymax1,class_number1
-image1_path xmin2,ymin2,xmax2,ymax2,class_number2
-image1_path xmin3,ymin3,xmax3,ymax3,class_number3
+image1_path xmin1,ymin1,xmax1,ymax1,class_name
+image1_path xmin2,ymin2,xmax2,ymax2,class_name
+image1_path xmin3,ymin3,xmax3,ymax3,class_name
 
 E:\Projects\Python\Data\Images\worldoftrucks\Source_Images\5FD8F3.jpg,592,475,651,475,axle
 E:\Projects\Python\Data\Images\worldoftrucks\Source_Images\5FD8F3.jpg,393,459,438,459,axle
@@ -30,7 +32,7 @@ import json
 import glob
 import os
 
-# All files ending with .jpg on data folder
+# All files ending with .json on source_images folder
 filelist = glob.glob('Source_Images/*.json')
 
 print("Starting FRCNN conversion...")

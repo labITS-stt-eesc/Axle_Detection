@@ -13,10 +13,10 @@ Converts labelme annotations into YOLO-ready training annotations
 ------------------(xmax,ymax)
 
 
-YOLO Annotation Structure Training Data 
-"image1_path" "object1" "object2" "object3"
+YOLO Annotation Structure for Training Data 
+"image1_path" "object1",class_number "object2",class_number "object3",class_number
 
-image_path xmin1,ymin1,xmax1,ymax1,class_number1 xmin2,ymin2,xmax2,ymax2,class_number2 xmin3,ymin3,xmax3,ymax3,class_number3
+image_path xmin1,ymin1,xmax1,ymax1,class_number xmin2,ymin2,xmax2,ymax2,class_number xmin3,ymin3,xmax3,ymax3,class_number
 
 E:\\20160927110318-550_color-_5BROI-1_5D-12.jpg 991,628,1110,742,0 1600,623,1721,738,0 1296,490,1405,585,0 955,489,1055,581,0
 
@@ -26,7 +26,7 @@ import json
 import glob
 import os
 
-# All files ending with .jpg on data folder
+# All files ending with .json on source_images folder
 filelist = glob.glob('Source_Images/*.json')
 
 
