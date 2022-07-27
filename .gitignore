@@ -166,3 +166,4 @@ mAP/mAP_FRCNN/output/
 
 # convert
 convertLabelme/Source_Images/*.*
+*.txt
