@@ -46,7 +46,7 @@ def _main():
     
     classes_path = os.path.join(Model_Folder, "data_classes.txt")
     anchors_path = os.path.join(Utils_Path,"model_data", "yolo_anchors.txt")
-    weights_path = os.path.join(Utils_Path, "yolov3-spp.h5")
+    weights_path = os.path.join(Utils_Path, "yolov3.h5")
     print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
     print(Image_Folder)
     print("BBBBBBBBBBBBBBBBBBBBBBBBB")
@@ -56,8 +56,9 @@ def _main():
     num_classes = len(class_names)
     anchors = get_anchors(anchors_path)
 
-    input_shape = (416,416) # multiplo de 32, altura x largura -> manter aspecto do ojeto, se possível
-   
+    input_shape = (736, 416) # multiplo de 32, altura x largura -> manter aspecto do objeto, se possível
+    input_shape = (416, 416)
+
     #quantidade de epocas por periodo de treinamento
     epoch1, epoch2 = 50, 50
 
@@ -91,7 +92,6 @@ def _main():
     with open(annotation_path) as f:
         lines = f.readlines()
         
-    
 
     #separa as imagens de treino e validação
     np.random.seed(10101)
