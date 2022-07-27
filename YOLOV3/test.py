@@ -74,7 +74,8 @@ detection_results_file = os.path.join(output_path, "Detection_Results.csv")
 
 model_folder = os.path.join(data_folder, "Model_Weights")
 
-model_weights = os.path.join(model_folder, "trained_weights_final.h5")
+model_weights = "L:\\Resultados\\YOLOv3\\YOLOv3_spp_416x416\\YOLOv3-spp_416x416.h5"
+                 
 #model_weights = os.path.join(model_folder, "yolo.h5")
 model_classes = os.path.join(model_folder, "data_classes.txt")
 
@@ -159,6 +160,32 @@ if input_image_paths:
 			save_img_path=output_path,
 		)
 		y_size, x_size, _ = np.array(image).shape
+		if not prediction:
+            #saving empty values to avoid errors while calculating mAP when no detection is made on an image
+			out_df = out_df.append(
+				pd.DataFrame(
+					[
+						[
+							os.path.basename(img_path.rstrip("\n")),
+							img_path.rstrip("\n"),
+						]
+						+ [0, 0, 0, 0, 0, 0]
+						+ [x_size, y_size]
+					],
+					columns=[
+						"image",
+						"image_path",
+						"xmin",
+						"ymin",
+						"xmax",
+						"ymax",
+						"label",
+						"confidence",
+						"x_size",
+						"y_size",
+					],
+				)
+            )
 		for single_prediction in prediction:
 			out_df = out_df.append(
 				pd.DataFrame(
