@@ -53,6 +53,6 @@ with open('annotate.txt', 'w') as output:
                 xmin = int(shape['points'][0][0])
                 ymin = int(shape['points'][0][1])
                 xmax = int(shape['points'][1][0])
-                ymax = int(shape['points'][0][1])
+                ymax = int(shape['points'][1][1])
             print("{},{},{},{},{},axle".format(image_path[:-4]+"jpg", xmin, ymin, xmax, ymax), file=output)
 print("Finished")

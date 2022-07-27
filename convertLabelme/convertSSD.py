@@ -55,6 +55,6 @@ with open('Train_csv.csv', 'w', newline='') as output:
                 xmin = int(shape['points'][0][0])
                 ymin = int(shape['points'][0][1])
                 xmax = int(shape['points'][1][0])
-                ymax = int(shape['points'][0][1])
+                ymax = int(shape['points'][1][1])
             csv_writer.writerow([image_path[:-4]+"jpg", xmin, ymin, xmax, ymax, 1])
 print("Finished")
