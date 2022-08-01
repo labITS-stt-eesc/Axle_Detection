@@ -1,5 +1,5 @@
-from keras.engine.topology import Layer
-import keras.backend as K
+from tensorflow.python.keras.layers import Layer
+import tensorflow.keras.backend as K
 
 if K.backend() == 'tensorflow':
     import tensorflow as tf
@@ -15,9 +15,9 @@ class RoiPoolingConv(Layer):
     # Input shape
         list of two 4D tensors [X_img,X_roi] with shape:
         X_img:
-        `(1, channels, rows, cols)` if dim_ordering='th'
+        `(1, channels, rows, cols)` if image_data_format='channels_first'
         or 4D tensor with shape:
-        `(1, rows, cols, channels)` if dim_ordering='tf'.
+        `(1, rows, cols, channels)` if image_data_format='channels_last'.
         X_roi:
         `(1,num_rois,4)` list of rois, with ordering (x,y,w,h)
     # Output shape
@@ -27,7 +27,7 @@ class RoiPoolingConv(Layer):
     def __init__(self, pool_size, num_rois, **kwargs):
 
         self.dim_ordering = K.image_data_format()
-        assert self.dim_ordering in {'channels_last', 'channels_first'}, 'dim_ordering must be in {channels_last, channels_first}'
+        assert self.dim_ordering in {'channels_last', 'channels_first'}, 'image_data_format must be in {channels_last, channels_first}'
 
         self.pool_size = pool_size
         self.num_rois = num_rois
