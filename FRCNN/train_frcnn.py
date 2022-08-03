@@ -76,8 +76,6 @@ val_imgs = [s for s in all_imgs if s['imageset'] == 'test']
 print('Num train samples {}'.format(len(train_imgs)))
 print('Num val samples {}'.format(len(val_imgs)))
 
-print(K.image_data_format())
-
 data_gen_train = data_generators.get_anchor_gt(train_imgs, classes_count, C, nn.get_img_output_length, K.image_data_format(), mode='train')
 data_gen_val = data_generators.get_anchor_gt(val_imgs, classes_count, C, nn.get_img_output_length, K.image_data_format(), mode='val')
 
@@ -98,7 +96,6 @@ rpn = nn.rpn(shared_layers, num_anchors)
 
 classifier = nn.classifier(shared_layers, roi_input, C.num_rois, nb_classes=len(classes_count), trainable=True)
 
-print(img_input)
 model_rpn = Model(img_input, rpn[:2])
 model_classifier = Model([img_input, roi_input], classifier)
 
@@ -151,10 +148,8 @@ for epoch_num in range(num_epochs):
 					print('RPN is not producing bounding boxes that overlap the ground truth boxes. Check RPN settings or keep training.')
 
 			X, Y, img_data = next(data_gen_train)
-			print(X, Y)
 
 			loss_rpn = model_rpn.train_on_batch(X, Y)
-			print(loss_rpn)
 
 			P_rpn = model_rpn.predict_on_batch(X)
 
