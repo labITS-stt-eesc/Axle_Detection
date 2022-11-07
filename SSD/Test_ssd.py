@@ -50,12 +50,9 @@ from models.keras_ssd300 import ssd_300
 from keras_loss_function.keras_ssd_loss import SSDLoss
 
 
-
-
-
 img_height = 300
 img_width = 300
-
+confidence_threshold = 0.70
 
 
 K.clear_session()
@@ -79,20 +76,22 @@ model = ssd_300(image_size=(img_height, img_width, 3),
                 normalize_coords=True,
                 subtract_mean=[123, 117, 104],
                 swap_channels=[2, 1, 0],
-                confidence_thresh=0.5,
-                iou_threshold=0.45,
-                top_k=200,
+                confidence_thresh=confidence_threshold,
+                iou_threshold=0.75,
+                top_k=10,
                 nms_max_output_size=400)
 
 
-weights_path = 'E:\\Projects\\Python\\Axle_Detection\\SSD\\ssd300_pascal_07+12_epoch-29_loss-1.7706_val_loss-2.0828.h5'
+#weights_path = 'E:\\Projects\\Python\\Axle_Detection\\SSD\\ssd300_pascal_07+12_epoch-29_loss-1.7706_val_loss-2.0828.h5'
+weights_path = 'E:\\Projects\\Python\\Axle_Detection\\SSD - Copy\\ssd300_epoch-80_loss-0.4275_val_loss-0.4224.h5'
 
-model.load_weights(weights_path, by_name=False)
+model.load_weights(weights_path, by_name=True)
 
 
 adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
 
 ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
+
 
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
@@ -131,7 +130,7 @@ for item in input_paths:
 
     y_pred = model.predict(input_images)
 
-    confidence_threshold = 0.5
+    
 
     y_pred_thresh = [y_pred[k][y_pred[k,:,1] > confidence_threshold] for k in range(y_pred.shape[0])]
     
@@ -155,7 +154,7 @@ for item in input_paths:
                     
     font_path = os.path.join(os.path.dirname(__file__), "font/FiraMono-Medium.otf")
     font = ImageFont.truetype(
-            font=font_path, size=np.floor(3e-2 * image2.size[1] + 0.5).astype("int32")
+            font=font_path, size=np.floor(3e-2 * image2.size[1] + 0.0).astype("int32")
         )
     thickness = (image2.size[0] + image2.size[1]) // 300        
 
@@ -169,7 +168,7 @@ for item in input_paths:
     for box in y_pred_thresh[0]:
             draw = ImageDraw.Draw(image2)
             total_size = draw.textsize(total, font)
-            label = "Eixo : {:.2f}".format(box[1])
+            label = "Eixo: {:.2f}".format(box[1])
             label_size = draw.textsize(label, font)
             
             if box[3]*ratio_y - label_size[1] >= 0:

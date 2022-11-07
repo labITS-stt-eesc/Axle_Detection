@@ -1,10 +1,14 @@
 '''
 A data generator for 2D object detection.
+
 Copyright (C) 2018 Pierluigi Ferrari
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
+
    http://www.apache.org/licenses/LICENSE-2.0
+
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -62,11 +66,14 @@ class DatasetError(Exception):
 class DataGenerator:
     '''
     A generator to generate batches of samples and corresponding labels indefinitely.
+
     Can shuffle the dataset consistently after each complete pass.
+
     Currently provides three methods to parse annotation data: A general-purpose CSV parser,
     an XML parser for the Pascal VOC datasets, and a JSON parser for the MS COCO datasets.
     If the annotations of your dataset are in a format that is not supported by these parsers,
     you could just add another parser method and still use this generator.
+
     Can perform image transformations for data conversion and data augmentation,
     for details please refer to the documentation of the `generate()` method.
     '''
@@ -85,6 +92,7 @@ class DataGenerator:
         '''
         Initializes the data generator. You can either load a dataset directly here in the constructor,
         e.g. an HDF5 dataset, or you can use one of the parser methods to read in a dataset.
+
         Arguments:
             load_images_into_memory (bool, optional): If `True`, the entire dataset will be loaded into memory.
                 This enables noticeably faster data generation than loading batches of images into memory ad hoc.
@@ -211,9 +219,11 @@ class DataGenerator:
         '''
         Loads an HDF5 dataset that is in the format that the `create_hdf5_dataset()` method
         produces.
+
         Arguments:
             verbose (bool, optional): If `True`, prints out the progress while loading
                 the dataset.
+
         Returns:
             None.
         '''
@@ -288,6 +298,7 @@ class DataGenerator:
                 of its boxes.
             ret (bool, optional): Whether or not to return the outputs of the parser.
             verbose (bool, optional): If `True`, prints out the progress for operations that may take a bit longer.
+
         Returns:
             None by default, optionally lists for whichever are available of images, image filenames, labels, and image IDs.
         '''
@@ -319,7 +330,7 @@ class DataGenerator:
                     box = [] # Store the box class and coordinates here
                     box.append(row[self.input_format.index('image_name')].strip()) # Select the image name column in the input format and append its content to `box`
                     for element in self.labels_output_format: # For each element in the output format (where the elements are the class ID and the four box coordinates)...
-                        box.append(int(round(float((row[self.input_format.index(element)].strip())))))# ...select the respective column in the input format and append it to `box`.
+                        box.append(int(row[self.input_format.index(element)].strip())) # ...select the respective column in the input format and append it to `box`.
                     data.append(box)
 
         data = sorted(data) # The data needs to be sorted, otherwise the next step won't give the correct result
@@ -404,6 +415,7 @@ class DataGenerator:
         '''
         This is an XML parser for the Pascal VOC datasets. It might be applicable to other datasets with minor changes to
         the code, but in its current form it expects the data format and XML tags of the Pascal VOC datasets.
+
         Arguments:
             images_dirs (list): A list of strings, where each string is the path of a directory that
                 contains images that are to be part of the dataset. This allows you to aggregate multiple datasets
@@ -426,6 +438,7 @@ class DataGenerator:
             exclude_difficult (bool, optional): If `True`, excludes boxes that are labeled as 'difficult'.
             ret (bool, optional): Whether or not to return the outputs of the parser.
             verbose (bool, optional): If `True`, prints out the progress for operations that may take a bit longer.
+
         Returns:
             None by default, optionally lists for whichever are available of images, image filenames, labels, image IDs,
             and a list indicating which boxes are annotated with the label "difficult".
@@ -447,71 +460,71 @@ class DataGenerator:
             self.eval_neutral = None
             annotations_dirs = [None] * len(images_dirs)
 
-			
-			
-        # Read the image set file that so that we know all the IDs of all the images to be included in the dataset.
-        image_set_filename = image_set_filenames
-        images_dir = images_dirs
-        annotations_dir = annotations_dirs
-        with open(image_set_filename) as f:
-            image_ids = [line.strip() for line in f] # Note: These are strings, not integers.
-            self.image_ids += image_ids
-        if verbose: it = tqdm(image_ids, desc="Processing image set '{}'".format(os.path.basename(image_set_filename)), file=sys.stdout)
-        else: it = image_ids
-        # Loop over all images in this dataset.
-        for image_id in it:
+        for images_dir, image_set_filename, annotations_dir in zip(images_dirs, image_set_filenames, annotations_dirs):
+            # Read the image set file that so that we know all the IDs of all the images to be included in the dataset.
+            with open(image_set_filename) as f:
+                image_ids = [line.strip() for line in f] # Note: These are strings, not integers.
+                self.image_ids += image_ids
 
-            filename = '{}'.format(image_id) + '.jpg'
-            self.filenames.append(os.path.join(images_dir, filename))
+            if verbose: it = tqdm(image_ids, desc="Processing image set '{}'".format(os.path.basename(image_set_filename)), file=sys.stdout)
+            else: it = image_ids
 
-            if not annotations_dir is None:
-                # Parse the XML file for this image.
-                with open(os.path.join(annotations_dir, image_id + '.xml')) as f:
-                    soup = BeautifulSoup(f, 'xml')
-                folder = soup.folder.text # In case we want to return the folder in addition to the image file name. Relevant for determining which dataset an image belongs to.
-                #filename = soup.filename.text
+            # Loop over all images in this dataset.
+            for image_id in it:
 
-                boxes = [] # We'll store all boxes for this image here.
-                eval_neutr = [] # We'll store whether a box is annotated as "difficult" here.
-                objects = soup.find_all('object') # Get a list of all objects in this image.
+                filename = '{}'.format(image_id) + '.jpg'
+                self.filenames.append(os.path.join(images_dir, filename))
 
-                # Parse the data for each object.
-                for obj in objects:
-                    class_name = obj.find('name', recursive=False).text
-                    class_id = self.classes.index(class_name)
-                    # Check whether this class is supposed to be included in the dataset.
-                    if (not self.include_classes == 'all') and (not class_id in self.include_classes): continue
-                    pose = obj.find('pose', recursive=False).text
-                    truncated = int(obj.find('truncated', recursive=False).text)
-                    if exclude_truncated and (truncated == 1): continue
-                    difficult = int(obj.find('difficult', recursive=False).text)
-                    if exclude_difficult and (difficult == 1): continue
-                    # Get the bounding box coordinates.
-                    bndbox = obj.find('bndbox', recursive=False)
-                    xmin = int(round(float(bndbox.xmin.text)))
-                    ymin = int(round(float(bndbox.ymin.text)))
-                    xmax = int(round(float(bndbox.xmax.text)))
-                    ymax = int(round(float(bndbox.ymax.text)))
-                    item_dict = {'folder': folder,
-                                 'image_name': filename,
-                                 'image_id': image_id,
-                                 'class_name': class_name,
-                                 'class_id': class_id,
-                                 'pose': pose,
-                                 'truncated': truncated,
-                                 'difficult': difficult,
-                                 'xmin': xmin,
-                                 'ymin': ymin,
-                                 'xmax': xmax,
-                                 'ymax': ymax}
-                    box = []
-                    for item in self.labels_output_format:
-                        box.append(item_dict[item])
-                    boxes.append(box)
-                    if difficult: eval_neutr.append(True)
-                    else: eval_neutr.append(False)
-                self.labels.append(boxes)
-                self.eval_neutral.append(eval_neutr)
+                if not annotations_dir is None:
+                    # Parse the XML file for this image.
+                    with open(os.path.join(annotations_dir, image_id + '.xml')) as f:
+                        soup = BeautifulSoup(f, 'xml')
+
+                    folder = soup.folder.text # In case we want to return the folder in addition to the image file name. Relevant for determining which dataset an image belongs to.
+                    #filename = soup.filename.text
+
+                    boxes = [] # We'll store all boxes for this image here.
+                    eval_neutr = [] # We'll store whether a box is annotated as "difficult" here.
+                    objects = soup.find_all('object') # Get a list of all objects in this image.
+
+                    # Parse the data for each object.
+                    for obj in objects:
+                        class_name = obj.find('name', recursive=False).text
+                        class_id = self.classes.index(class_name)
+                        # Check whether this class is supposed to be included in the dataset.
+                        if (not self.include_classes == 'all') and (not class_id in self.include_classes): continue
+                        pose = obj.find('pose', recursive=False).text
+                        truncated = int(obj.find('truncated', recursive=False).text)
+                        if exclude_truncated and (truncated == 1): continue
+                        difficult = int(obj.find('difficult', recursive=False).text)
+                        if exclude_difficult and (difficult == 1): continue
+                        # Get the bounding box coordinates.
+                        bndbox = obj.find('bndbox', recursive=False)
+                        xmin = int(bndbox.xmin.text)
+                        ymin = int(bndbox.ymin.text)
+                        xmax = int(bndbox.xmax.text)
+                        ymax = int(bndbox.ymax.text)
+                        item_dict = {'folder': folder,
+                                     'image_name': filename,
+                                     'image_id': image_id,
+                                     'class_name': class_name,
+                                     'class_id': class_id,
+                                     'pose': pose,
+                                     'truncated': truncated,
+                                     'difficult': difficult,
+                                     'xmin': xmin,
+                                     'ymin': ymin,
+                                     'xmax': xmax,
+                                     'ymax': ymax}
+                        box = []
+                        for item in self.labels_output_format:
+                            box.append(item_dict[item])
+                        boxes.append(box)
+                        if difficult: eval_neutr.append(True)
+                        else: eval_neutr.append(False)
+
+                    self.labels.append(boxes)
+                    self.eval_neutral.append(eval_neutr)
 
         self.dataset_size = len(self.filenames)
         self.dataset_indices = np.arange(self.dataset_size, dtype=np.int32)
@@ -536,6 +549,7 @@ class DataGenerator:
         '''
         This is an JSON parser for the MS COCO datasets. It might be applicable to other datasets with minor changes to
         the code, but in its current form it expects the JSON format of the MS COCO datasets.
+
         Arguments:
             images_dirs (list, optional): A list of strings, where each string is the path of a directory that
                 contains images that are to be part of the dataset. This allows you to aggregate multiple datasets
@@ -552,6 +566,7 @@ class DataGenerator:
                 are to be included in the dataset. If 'all', all ground truth boxes will be included in the dataset.
             ret (bool, optional): Whether or not to return the outputs of the parser.
             verbose (bool, optional): If `True`, prints out the progress for operations that may take a bit longer.
+
         Returns:
             None by default, optionally lists for whichever are available of images, image filenames, labels and image IDs.
         '''
@@ -660,13 +675,17 @@ class DataGenerator:
         to be loaded faster. Such an uncompressed dataset, however, may take up considerably
         more space on your hard drive than the sum of the source images in a compressed format
         such as JPG or PNG.
+
         It is recommended that you always convert the dataset into an HDF5 dataset if you
         have enugh hard drive space since loading from an HDF5 dataset accelerates the data
         generation noticeably.
+
         Note that you must load a dataset (e.g. via one of the parser methods) before creating
         an HDF5 dataset from it.
+
         The created HDF5 dataset will remain open upon its creation so that it can be used right
         away.
+
         Arguments:
             file_path (str, optional): The full file path under which to store the HDF5 dataset.
                 You can load this output file via the `DataGenerator` constructor in the future.
@@ -678,6 +697,7 @@ class DataGenerator:
                 value will be stored in the HDF5 dataset in order to be able to quickly find out
                 whether the images in the dataset all have the same size or not.
             verbose (bool, optional): Whether or not prit out the progress of the dataset creation.
+
         Returns:
             None.
         '''
@@ -817,9 +837,12 @@ class DataGenerator:
                  degenerate_box_handling='remove'):
         '''
         Generates batches of samples and (optionally) corresponding labels indefinitely.
+
         Can shuffle the samples consistently after each complete pass.
+
         Optionally takes a list of arbitrary image transformations to apply to the
         samples ad hoc.
+
         Arguments:
             batch_size (int, optional): The size of the batches to be generated.
             shuffle (bool, optional): Whether or not to shuffle the dataset before each pass.
@@ -878,6 +901,7 @@ class DataGenerator:
                 transformations have been applied (if any), but before the labels were passed to the `label_encoder` (if one was given).
                 Can be one of 'warn' or 'remove'. If 'warn', the generator will merely print a warning to let you know that there
                 are degenerate boxes in a batch. If 'remove', the generator will remove degenerate boxes from the batch silently.
+
         Yields:
             The next batch as a tuple of items as defined by the `returns` argument.
         '''
@@ -1160,6 +1184,7 @@ class DataGenerator:
         parsed from XML files, which can take quite long. If you'll be using the
         same dataset repeatedly, you don't want to have to parse the XML label
         files every time.
+
         Arguments:
             filenames_path (str): The path under which to save the filenames pickle.
             labels_path (str): The path under which to save the labels pickle.
