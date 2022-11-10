@@ -1,4 +1,8 @@
 # Axle_Detection
+
+![Keywords](https://img.shields.io/badge/Keywords-Neural%20Networks%2C%20Python%2C%20Transport%20Engineering-blueviolet?style=flat-square) ![GitHub](https://img.shields.io/github/license/leandromarcomini/Axle_Detection?style=flat-square) ![GitHub](https://img.shields.io/github/languages/top/leandromarcomini/Axle_Detection?style=flat-square)
+
+
 Compilation of neural networks used for training and detecting vehicle axles. The dataset used in all networks is available to [donwload](https://doi.org/10.5281/zenodo.5744737) in Zenodo, and it's composed of 725 images of trucks from a sidepoint view, to enable axle detection. If the dataset or this repo happens to be usefull for anyone, please cite us where relevant, using any of these publications:
 
 <a id="1">[1]</a> 
