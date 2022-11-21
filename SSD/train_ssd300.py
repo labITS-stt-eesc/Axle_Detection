@@ -76,12 +76,12 @@ model.load_weights(weights_path, by_name=True)
 #    If you want to follow the original Caffe implementation, use the preset SGD
 #    optimizer, otherwise I'd recommend the commented-out Adam optimizer.
 
-#adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
-sgd = SGD(lr=0.001, momentum=0.9, decay=0.0, nesterov=False)
+adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+#sgd = SGD(lr=0.001, momentum=0.9, decay=0.0, nesterov=False)
 
 ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 
-model.compile(optimizer=sgd, loss=ssd_loss.compute_loss)
+model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
 # 1: Instantiate two `DataGenerator` objects: One for training, one for validation.
 
@@ -114,19 +114,19 @@ val_dataset.parse_csv(images_dir=images_dir,
 # option in the constructor, because in that cas the images are in memory already anyway. If you don't
 # want to create HDF5 datasets, comment out the subsequent two function calls.
 
-train_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07+12_trainval.h5',
+train_dataset.create_hdf5_dataset(file_path='dataset_trainval.h5',
                                   resize=False,
                                   variable_image_size=True,
                                   verbose=True)
 
-val_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07_test.h5',
+val_dataset.create_hdf5_dataset(file_path='dataset_test.h5',
                                 resize=False,
                                 variable_image_size=True,
                                 verbose=True)
 
 # 3: Set the batch size.
 
-batch_size = 32 # Change the batch size if you like, or if you run into GPU memory issues.
+batch_size = 16 # Change the batch size if you like, or if you run into GPU memory issues.
 
 # 4: Set the image transformations for pre-processing and data augmentation options.
 
@@ -195,11 +195,11 @@ print("Number of images in the validation dataset:\t{:>6}".format(val_dataset_si
 
 def lr_schedule(epoch):
     if epoch < 80:
-        return 0.01
-    elif epoch < 100:
         return 0.001
-    else:
+    elif epoch < 100:
         return 0.0001
+    else:
+        return 0.00001
 
 # Define model callbacks.
 
@@ -229,8 +229,8 @@ callbacks = [model_checkpoint,
 
 # If you're resuming a previous training, set `initial_epoch` and `final_epoch` accordingly.
 initial_epoch   = 0
-final_epoch     = 80
-steps_per_epoch = 120
+final_epoch     = 120
+steps_per_epoch = 300
 
 history = model.fit_generator(generator=train_generator,
                               steps_per_epoch=steps_per_epoch,

@@ -52,7 +52,7 @@ from keras_loss_function.keras_ssd_loss import SSDLoss
 
 img_height = 300
 img_width = 300
-confidence_threshold = 0.70
+confidence_threshold = 0.5
 
 
 K.clear_session()
@@ -77,13 +77,16 @@ model = ssd_300(image_size=(img_height, img_width, 3),
                 subtract_mean=[123, 117, 104],
                 swap_channels=[2, 1, 0],
                 confidence_thresh=confidence_threshold,
-                iou_threshold=0.75,
+                iou_threshold=0.5,
                 top_k=10,
                 nms_max_output_size=400)
 
 
 #weights_path = 'E:\\Projects\\Python\\Axle_Detection\\SSD\\ssd300_pascal_07+12_epoch-29_loss-1.7706_val_loss-2.0828.h5'
-weights_path = 'E:\\Projects\\Python\\Axle_Detection\\SSD - Copy\\ssd300_epoch-80_loss-0.4275_val_loss-0.4224.h5'
+#casa
+weights_path = 'E:\\Projects\\Python\\Axle_Detection\\SSD\\ssd300_epoch-15_loss-0.4182_val_loss-0.4131.h5'
+#usp
+weights_path = 'D:\\Python\\SSD\\ssd300_epoch-71_loss-1.8728_val_loss-1.8872.h5'
 
 model.load_weights(weights_path, by_name=True)
 

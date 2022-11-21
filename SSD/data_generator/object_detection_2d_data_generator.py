@@ -1171,6 +1171,7 @@ class DataGenerator:
             if 'original_images' in returns: ret.append(batch_original_images)
             if 'original_labels' in returns: ret.append(batch_original_labels)
 
+            ret = tuple(ret)
             yield ret
 
     def save_dataset(self,
