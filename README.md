@@ -12,8 +12,8 @@ arXiv preprint [arXiv:2204.01868](https://arxiv.org/abs/2204.01868)
 
 <a id="2">[2]</a> 
 Marcomini, L. A., Cunha, A. L. (2021).
-Truck Image Dataset (1.0.0)
-Zenodo. [Data set](https://doi.org/10.5281/zenodo.5744737)
+Truck Image Dataset (2.0.0)
+Zenodo. [Data set](https://doi.org/10.5281/zenodo.5744736)
 
 
 ## Conda Environment
