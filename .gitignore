@@ -133,7 +133,6 @@ YOLOV3/utils/yolo.h5
 YOLOV3/Data/Source_Images/Test_Image_Detection_Results/*.*
 YOLOV3/Data/Source_Images/Test_Images/*.*
 YOLOV3/Data/Source_Images/Training_Images/*.*
-YOLOV3/Data/Model_Weights/
 
 # FRCNN
 /FRCNN/model_frcnn.hdf5
@@ -166,7 +165,6 @@ mAP/mAP_FRCNN/output/
 
 # convert
 convertLabelme/Source_Images/*.*
-*.txt
 convertLabelme/data_train.txt
 convertLabelme/Train_csv.csv
 mAP/mAP_yolo/output/classes/Eixo.png
@@ -175,5 +173,4 @@ mAP/mAP_yolo/output/ground-truth-info.png
 mAP/mAP_yolo/output/lamr.png
 mAP/mAP_yolo/output/mAP.png
 mAP/mAP_yolo/output/output.txt
-YOLOV3/Data/Source_Images/Source_Images.7z
 *.jpg
