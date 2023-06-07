@@ -43,7 +43,7 @@ Required versions:
 
 Required versions:
 - Keras: 2.3.1
-- Tensorflow-gpu: 2.7.0
+- Tensorflow-gpu: 2.2.0
 
 
 ## GPU libs (GTX1080 & GTX1060)
