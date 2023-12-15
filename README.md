@@ -25,11 +25,20 @@ conda env create --name <env_name> --file <env_file.yml>
 
 Conda will try to download and parse all libraries used on each environment. To check which packages are used, you can open the .yml files using your preferred text editor (which should be [Notepad++](https://notepad-plus-plus.org/downloads/), just saying).
 
+YOLOv8 env files will be added soon!
+
 ## YOLOv3
 
 Required versions:
 - Keras: 2.4.3
 - Tensorflow-gpu: 2.2.0
+
+
+## YOLOv8
+
+Required versions:
+- Keras: ???
+- Tensorflow-gpu: ???
 
 
 ## SSD
