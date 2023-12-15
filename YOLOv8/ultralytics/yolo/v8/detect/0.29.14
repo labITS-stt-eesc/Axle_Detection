@@ -1,0 +1,8 @@
+Collecting setuptools
+  Using cached setuptools-67.6.0-py3-none-any.whl (1.1 MB)
+Collecting wheel
+  Using cached wheel-0.38.4-py3-none-any.whl (36 kB)
+Collecting Cython
+  Using cached Cython-0.29.33-py2.py3-none-any.whl (987 kB)
+Installing collected packages: wheel, setuptools, Cython
+Successfully installed Cython-0.29.33 setuptools-67.6.0 wheel-0.38.4
